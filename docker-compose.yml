@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  mongo-1:
+    image: mongo:latest
+    container_name: mongo-1
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    volumes:
+      - ./data/db-one:/data/db
+      - ./replica-set.keyfile:/srv/mongodb/mongodb.keyfile
+    ports:
+      - 27010:27010
+    restart: always
+    command: --port 27010 --bind_ip_all --replSet rs --keyFile /srv/mongodb/mongodb.keyfile
+    network_mode: host
+
+  mongo-2:
+    image: mongo:latest
+    container_name: mongo-2
+    volumes:
+      - ./data/db-two:/data/db
+      - ./replica-set.keyfile:/srv/mongodb/mongodb.keyfile
+    ports:
+      - 27011:27011
+    restart: always
+    command: --port 27011 --bind_ip_all --replSet rs --keyFile /srv/mongodb/mongodb.keyfile
+    network_mode: host
