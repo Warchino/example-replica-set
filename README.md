@@ -20,7 +20,7 @@ docker-compose up -d
 * Connect to the machines using:
 
 ```shell script
-mongo mongodb://admin:admin@<ip>:27010
+mongo mongodb://admin:admin@<ip>:27010/admin
 ```
 
 Also you can connect using docker:
